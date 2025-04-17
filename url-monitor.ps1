@@ -110,7 +110,11 @@ function Test-Url {
         # Create request with timeout
         $request = [System.Net.WebRequest]::Create($url)
         $request.Timeout = 3000 # 3 seconds timeout
-        $request.Method = "HEAD" # Only get headers, faster
+        $request.Method = "GET" # Use GET instead of HEAD for better compatibility
+        
+        # Add browser-like headers
+        $request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+        $request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
         
         # Get response
         $response = $request.GetResponse()
